@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  color: #2c3038;
+  background: #f5f6f8;
+  padding: 14px;
+}
+
+.header {
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #c0392b;
+}
+
+.header .sub {
+  font-size: 11px;
+  color: #8a9099;
+  margin-top: 3px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid #e8eaed;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+}
+
+.status-row .label {
+  color: #8a9099;
+  flex: 0 0 64px;
+}
+
+.status-row .value {
+  flex: 1;
+  font-weight: 500;
+}
+
+.value.ok { color: #2f9e44; }
+.value.warn { color: #e8590c; }
+.value.bad { color: #c92a2a; }
+.value.pending { color: #868e96; font-weight: 400; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #1971c2;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+  text-decoration: underline;
+}
+
+.link-btn.clear {
+  display: block;
+  margin: 8px auto 0;
+  color: #868e96;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+}
+
+.field label {
+  flex: 1;
+  color: #495057;
+}
+
+.field input {
+  width: 60px;
+  padding: 5px 8px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #e74c3c;
+}
+
+.field .unit {
+  color: #8a9099;
+  width: 18px;
+}
+
+.hint {
+  font-size: 11px;
+  color: #8a9099;
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+button.primary,
+button.secondary {
+  flex: 1;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+
+button.primary {
+  background: #e74c3c;
+  color: #fff;
+}
+
+button.primary:hover:not(:disabled) { opacity: .88; }
+
+button.secondary {
+  background: #eef0f3;
+  color: #495057;
+}
+
+button.secondary:hover:not(:disabled) { background: #e3e6ea; }
+
+button.secondary.small {
+  padding: 6px 8px;
+  font-size: 11px;
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.bar {
+  height: 6px;
+  background: #eef0f3;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #e74c3c, #f1948a);
+  transition: width .3s;
+}
+
+.log {
+  max-height: 110px;
+  overflow-y: auto;
+  font-size: 11px;
+  color: #6c757d;
+  line-height: 1.7;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f1f3f5;
+}
+
+.error {
+  background: #fff5f5;
+  border: 1px solid #ffc9c9;
+  color: #c92a2a;
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.warn {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #c92a2a;
+  background: #fff5f5;
+  border-left: 3px solid #e74c3c;
+  border-radius: 4px;
+  padding: 6px 9px;
+  margin-top: 8px;
+}
+
+/* 数量超过阈值时加重，让用户注意到这次确实调高了 */
+.warn.warn-strong {
+  background: #ffe3e3;
+  font-weight: 600;
+}
+
+.diag-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.diag {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: #f8f9fa;
+  border: 1px solid #e8eaed;
+  border-radius: 5px;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #495057;
+  max-height: 260px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.hidden { display: none; }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>JD 商品采集助手</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>JD 商品采集助手</h1>
+    <p class="sub">仅采集当前页面的公开数据，用于个人学习与数据分析</p>
+  </header>
+
+  <!-- 状态区 -->
+  <section class="card">
+    <div class="status-row">
+      <span class="label">登录状态</span>
+      <span id="login-state" class="value pending">检测中…</span>
+      <button id="btn-refresh" class="link-btn" title="重新检测">刷新</button>
+    </div>
+    <div class="status-row">
+      <span class="label">当前页面</span>
+      <span id="page-state" class="value pending">检测中…</span>
+    </div>
+    <p id="status-detail" class="hint"></p>
+    <div class="diag-btns">
+      <button id="btn-diagnose" class="link-btn">检查页面结构</button>
+      <button id="btn-diagnose-expanded" class="link-btn">检查展开后的评论区</button>
+    </div>
+    <pre id="diag-output" class="diag hidden"></pre>
+  </section>
+
+  <!-- 配置区 -->
+  <section class="card">
+    <div class="field">
+      <label for="input-comments">评论数量</label>
+      <input id="input-comments" type="number" min="1" max="50" value="10">
+      <span class="unit">条</span>
+    </div>
+    <p id="comment-warn" class="warn">
+      ⚠ 评论数量越大，要滚动的次数和向京东发出的请求就越多，越容易触发风控。建议保持在 20 条以内。
+    </p>
+    <p class="hint">
+      只采集当前打开的这个商品。评论数量是目标条数，实际拿到多少取决于页面上加载出了多少。
+    </p>
+  </section>
+
+  <!-- 操作区 -->
+  <section class="actions">
+    <button id="btn-start" class="primary">一键采集</button>
+    <button id="btn-stop" class="secondary" disabled>停止</button>
+  </section>
+
+  <!-- 进度区 -->
+  <section id="progress-card" class="card hidden">
+    <div class="status-row">
+      <span class="label">进度</span>
+      <span id="progress-text" class="value">0 / 0</span>
+    </div>
+    <div class="bar"><div id="bar-fill" class="bar-fill"></div></div>
+    <p id="progress-detail" class="hint"></p>
+    <div id="log" class="log"></div>
+  </section>
+
+  <!-- 结果区 -->
+  <section id="result-card" class="card hidden">
+    <div class="status-row">
+      <span class="label">已采集</span>
+      <span id="result-text" class="value">0 个商品</span>
+    </div>
+    <div class="actions">
+      <button id="btn-csv" class="secondary small">导出 CSV</button>
+      <button id="btn-json" class="secondary small">完整 JSON</button>
+    </div>
+    <button id="btn-clear" class="link-btn clear">清除本次结果</button>
+  </section>
+
+  <p id="error" class="error hidden"></p>
+
+  <script src="popup.js"></script>
+</body>
+</html>
