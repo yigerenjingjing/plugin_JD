@@ -1,7 +1,7 @@
 # JD 商品采集助手（浏览器扩展）
 
-#仅用于个人学习与数据分析！！！
-#For personal study and data analysis only！！！
+**仅用于个人学习与数据分析！！！**
+**For personal study and data analysis only！！！**
 在浏览器里直接采集京东商品详情和评论的 MV3 扩展。独立于仓库根目录的 Python 爬虫，
 不修改、不依赖那份代码，只是复用了它的选择器、解析规则和限速参数。
 
@@ -60,13 +60,13 @@ plugin_JD/
 
 ## 与源项目的对应关系
 
-| 本扩展 | 源项目 |
-| --- | --- |
-| `lib/selectors.js` | `jd_config.py` 的选择器列表与限速参数 |
-| `lib/utils.js` | `crawler/jd_utils.py` |
+| 本扩展                   | 源项目                               |
+| --------------------- | --------------------------------- |
+| `lib/selectors.js`    | `jd_config.py` 的选择器列表与限速参数        |
+| `lib/utils.js`        | `crawler/jd_utils.py`             |
 | `lib/crawler.js` 商品部分 | `crawler/jd_product_extractor.py` |
-| `lib/crawler.js` 评论部分 | `crawler/jd_comment_crawler.py` |
-| `background.js` 登录检测 | `crawler/jd_browser.py` 的登录态探测 |
+| `lib/crawler.js` 评论部分 | `crawler/jd_comment_crawler.py`   |
+| `background.js` 登录检测  | `crawler/jd_browser.py` 的登录态探测    |
 
 移植时保持了原来的尝试顺序和边界条件。比如销量解析的四条正则、
 好评率的三种语序、评论「先清洗再计入配额」的计数方式，都和 Python 版一致。
