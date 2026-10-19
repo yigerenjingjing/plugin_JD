@@ -422,7 +422,11 @@ async function handlePageLoadedInner(tabId) {
         commentCount: 0,
         commentSource: ''
       };
-      logLine(task, `「${shortName(merged.商品名称)}」详情已提取`);
+      const paramCount = Object.keys(merged.商品参数 || {}).length;
+      logLine(
+        task,
+        `「${shortName(merged.商品名称)}」详情已提取，${paramCount} 项规格参数`
+      );
 
       // 评论一律先进入评论区，不看已经渲染出多少条。
       // 评论区是固定高度的预览，不点开「全部评价」就永远只有最初那几条，
@@ -653,6 +657,13 @@ function shortName(name) {
 /** 合并搜索结果页的卡片数据和详情页数据，卡片数据优先保留非空字段。 */
 function mergeProduct(card, detail) {
   const d = detail || {};
+  const params =
+    d.商品参数 && typeof d.商品参数 === 'object' ? d.商品参数 : {};
+  // 好评率优先从销量文案推导（旧版「好评率98%」常和销量放同一栏），
+  // 新版分成独立元素，推导不出时用详情页本身解析的值
+  const rateFromSales = JD_parseRate(card.销量 || d.销量 || '');
+  const rate = rateFromSales || (d.好评率 || 0);
+
   return {
     商品名称: card.商品名称 || d.商品名称 || '',
     价格: card.价格 || d.价格 || '',
@@ -661,7 +672,9 @@ function mergeProduct(card, detail) {
     销量: card.销量 || d.销量 || '',
     详情链接: card.详情链接 || d.详情链接 || '',
     销量解析: JD_parseSales(card.销量 || d.销量 || ''),
-    好评率: JD_parseRate(card.销量 || d.销量 || ''),
+    好评率: rate,
+    商品参数: params,
+    款式: d.款式 || [],
     采集时间: new Date().toISOString()
   };
 }

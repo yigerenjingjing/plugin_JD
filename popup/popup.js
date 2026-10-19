@@ -251,6 +251,48 @@ async function exportCsv() {
     rows.push(['好评率(%)', r.好评率 || 0]);
     rows.push(['详情链接', r.详情链接 || '']);
     rows.push(['采集时间', r.采集时间 || '']);
+
+    // ── 规格与包装参数表（品牌、商品编号、保质期类别等）──
+    // 参数随商品不同而不同，所以不用固定表头，每个参数一行「参数名,参数值」。
+    // 只有文本值，参数区下方的商品介绍图片不采集。
+    const params = r.商品参数 || {};
+    const paramRows = Object.entries(params).filter(
+      ([, v]) => typeof v === 'string' && v
+    );
+    if (paramRows.length) {
+      for (const [k, v] of paramRows) {
+        rows.push([k, v]);
+      }
+    } else {
+      rows.push(['商品参数', '（未提取到，详情页没有规格与包装表或结构已变化）']);
+    }
+    rows.push([]);
+
+    // ── 款式/变体 ──
+    const variants = r.款式 || [];
+    if (variants.length) {
+      rows.push(['【款式】']);
+      rows.push(['属性分类', '选项名称', 'SKU', '价格', '库存状态']);
+      for (const group of variants) {
+        const cat = group.属性分类 || '未分类';
+        const options = group.选项 || [];
+        if (options.length) {
+          for (const opt of options) {
+            rows.push([
+              cat,
+              opt.选项名称 || '',
+              opt.SKU || '',
+              opt.价格 || '',
+              opt.库存状态 || '未知'
+            ]);
+          }
+        }
+      }
+    } else {
+      rows.push(['【款式】']);
+      rows.push(['属性分类', '选项名称', 'SKU', '价格', '库存状态']);
+      rows.push(['', '（未提取到款式选项，无变体或页面结构已变化）', '', '', '']);
+    }
     rows.push([]);
 
     // ── 第二段：评论 ──
